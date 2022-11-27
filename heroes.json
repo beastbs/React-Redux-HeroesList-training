@@ -23,6 +23,12 @@
       "name": "Ветреный ураган",
       "description": "Запускать бурю",
       "element": "wind"
+    },
+    {
+      "id": "25757650",
+      "name": "Пятый герой",
+      "description": "Огненный шар",
+      "element": "fire"
     }
   ],
   "filters": [

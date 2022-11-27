@@ -4,12 +4,7 @@ import { useHttp } from "../../hooks/http.hook";
 
 import classNames from "classnames";
 
-import {
-  filtersFetching,
-  filtersFetched,
-  filtersFetchingError,
-  activeFilterChanged,
-} from "../../actions";
+import { fetchingFilters, activeFilterChanged } from "../../actions";
 
 import Spinner from "../spinner/Spinner";
 
@@ -28,10 +23,7 @@ const HeroesFilters = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(filtersFetching());
-    request("http://localhost:3001/filters")
-      .then((data) => dispatch(filtersFetched(data)))
-      .catch(() => dispatch(filtersFetchingError()));
+    dispatch(fetchingFilters(request));
     // eslint-disable-next-line
   }, []);
 

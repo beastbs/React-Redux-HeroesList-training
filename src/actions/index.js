@@ -1,3 +1,17 @@
+export const fetchHeroes = (request) => (dispatch) => {
+  dispatch(heroesFetching());
+  request("http://localhost:3001/heroes")
+    .then((heroes) => dispatch(heroesFetched(heroes)))
+    .catch(() => dispatch(heroesFetchingError()));
+};
+
+export const fetchingFilters = (request) => (dispatch) => {
+  dispatch(filtersFetching());
+  request("http://localhost:3001/filters")
+    .then((data) => dispatch(filtersFetched(data)))
+    .catch(() => dispatch(filtersFetchingError()));
+};
+
 export const heroesFetching = () => {
   return {
     type: "HEROES_FETCHING",
@@ -36,11 +50,14 @@ export const filtersFetchingError = () => {
   };
 };
 
-export const activeFilterChanged = (filter) => {
-  return {
-    type: "ACTIVE_FILTER_CHANGED",
-    payload: filter,
-  };
+export const activeFilterChanged = (filter) => (dispatch) => {
+  // Используя thunk-middleware - dispatch приходит сюда автоматически
+  setTimeout(() => {
+    dispatch({
+      type: "ACTIVE_FILTER_CHANGED",
+      payload: filter,
+    });
+  }, 500);
 };
 
 export const heroDeleted = (id) => {
